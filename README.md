@@ -1,19 +1,18 @@
 # Herramienta de reconocimiento desarrollada
 
 ## Objetivo
+El objetivo de la herramienta desarrollada es automatizar la etapa de reconocimiento establecida en la metodología sugerida. Su propósito fundamental es determinar la superficie de ataque de una API o una aplicación web a partir de una URL base, con el fin de disminuir la carga manual del analista en esta fase inicial.
 
-La herramienta desarrollada tiene como finalidad automatizar la fase de reconocimiento definida en la metodología propuesta. Su objetivo principal es identificar la superficie de ataque de una aplicación web o API a partir de una URL base, reduciendo el esfuerzo manual del analista en esta etapa inicial.
-
-La herramienta se basa exclusivamente en técnicas de análisis pasivo, limitándose a recopilar información accesible públicamente sin realizar pruebas intrusivas ni explotación de vulnerabilidades.
+La herramienta se fundamenta únicamente en métodos de análisis pasivo, que solo recopila datos disponibles al público sin efectuar pruebas intrusivas o aprovechar vulnerabilidades.
 
 ---
 
 ## Funcionamiento general
 
-El funcionamiento de la herramienta se basa en una serie de pasos secuenciales:
+La herramienta opera siguiendo una serie de pasos secuenciales:
 
-1. Se realiza una petición inicial a la URL objetivo.
-2. Se analiza el contenido HTML para extraer enlaces y recursos asociados.
+1. Se hace una solicitud inicial a la URL de destino.
+2. Se examina el contenido HTML para obtener enlaces y recursos relacionados.
 3. Se identifican ficheros JavaScript y se analizan en busca de posibles endpoints.
 4. Se comprueba la existencia de documentación de API basada en estándares como OpenAPI o Swagger.
 5. Se generan rutas adicionales a partir de patrones comunes en aplicaciones web.
@@ -24,75 +23,74 @@ El funcionamiento de la herramienta se basa en una serie de pasos secuenciales:
 
 ## Técnicas de descubrimiento utilizadas
 
-Para maximizar la cobertura del reconocimiento, la herramienta combina distintas técnicas:
+La herramienta combina diferentes técnicas para optimizar la cobertura del reconocimiento:
 
-- Análisis de enlaces presentes en el código HTML.
-- Extracción de rutas a partir de ficheros JavaScript mediante expresiones regulares.
-- Consulta de rutas estándar donde suele encontrarse documentación de APIs.
-- Generación de rutas comunes basadas en patrones habituales.
-- Filtrado de resultados para limitar el análisis al dominio objetivo.
+- Estudio de vínculos que aparecen en el código HTML.
+- Utilización de expresiones regulares para extraer rutas a partir de archivos JavaScript.
 
-Este enfoque permite obtener una visión amplia de la superficie de ataque sin necesidad de realizar técnicas activas.
+- Verificación de rutas estándar donde generalmente se encuentra la documentación de las APIs.
+- Creación de rutas comunes basadas en patrones regulares.
+- Filtrado de los resultados para restringir el análisis al dominio pertinente.
+
+Esta perspectiva posibilita una visión extensa de la superficie de ataque sin tener que implementar técnicas activas.
 
 ---
 
 ## Arquitectura del sistema
 
-La herramienta ha sido desarrollada siguiendo una arquitectura modular, diferenciando claramente las responsabilidades:
+La herramienta fue creada utilizando una estructura modular y separando de manera clara las responsabilidades:
 
-- **Módulo de comunicación:** realiza peticiones HTTP utilizando sesiones persistentes.
-- **Módulo de análisis HTML:** extrae enlaces y recursos del contenido web.
-- **Módulo de análisis de JavaScript:** identifica posibles endpoints mediante patrones.
-- **Módulo de descubrimiento:** combina las distintas fuentes de información para generar nuevas rutas.
-- **Módulo de análisis de respuestas:** recoge información como códigos HTTP, cabeceras y tamaño de respuesta.
-- **Módulo de generación de informes:** produce salidas en formato JSON y HTML.
+- **Módulo de comunicación:**  Emplea sesiones persistentes para llevar a cabo solicitudes HTTP.
+- **Módulo de análisis HTML:** obtiene recursos y vínculos del contenido de la web.
+- **Módulo de análisis de JavaScript:** encuentra posibles puntos finales usando patrones.
+- **Módulo de descubrimiento:** fusiona las diferentes fuentes de información para crear nuevas rutas.
+- **Módulo de análisis de respuestas:** compila datos tales como códigos HTTP, encabezados y tamaño de respuesta.
+- **Módulo de generación de informes:** genera resultados en HTML y JSON.
 
-Esta separación facilita la extensibilidad y el mantenimiento del sistema.
+Esta división permite que el sistema sea mantenido y ampliado con facilidad.
 
 ---
 
 ## Decisiones de diseño
 
-Durante el desarrollo de la herramienta se han tomado varias decisiones relevantes:
+Se han realizado varias decisiones importantes durante la creación de la herramienta:
 
-- Uso de Python por su simplicidad y disponibilidad de librerías para análisis web.
-- Utilización de sesiones HTTP para mejorar la eficiencia en las peticiones.
-- Aplicación de expresiones regulares para el análisis de JavaScript, evitando la complejidad de un parser completo.
-- Limitación del análisis al dominio objetivo para evitar comportamiento no deseado.
-
-Estas decisiones permiten mantener un equilibrio entre funcionalidad y simplicidad.
-
+- Empleo de Python por su facilidad de uso y la disponibilidad de bibliotecas para el análisis de páginas web.
+- Aplicación de sesiones HTTP para optimizar la eficacia en las solicitudes.
+- Uso de expresiones regulares para el análisis de JavaScript, sin necesidad de un parser completo.
+- Restringir el análisis al dominio objetivo con el fin de prevenir un comportamiento no deseado.
 ---
 
 ## Resultados generados
 
-La herramienta genera un informe estructurado que incluye:
+La herramienta produce un informe organizado que contiene:
 
-- Lista de endpoints descubiertos.
+- Catálogo de endpoints hallados.
 - Información de cada endpoint (código HTTP, tipo de contenido, tamaño).
-- Cabeceras de respuesta del servidor.
-- Posible documentación de API detectada.
+- Encabezados de respuesta del servidor.
+- Posible documentación de API identificada.
 
-Este informe constituye la entrada para las fases posteriores de la metodología.
+Este informe es la entrada para las etapas posteriores de la metodología.
 
 ---
 
 ## Limitaciones
 
-La herramienta presenta varias limitaciones derivadas de su diseño:
+Debido a su diseño, la herramienta tiene varias restricciones:
 
-- No ejecuta código JavaScript en el cliente, lo que puede limitar el análisis en aplicaciones modernas.
-- El análisis de JavaScript se basa en patrones, por lo que no detecta todos los casos posibles.
-- No gestiona autenticación, analizando únicamente recursos accesibles públicamente.
-- No realiza pruebas de vulnerabilidad ni explotación.
+- No implementa ningún código JavaScript en el cliente, lo que podría restringir el análisis en aplicaciones contemporáneas.
+- Al fundamentarse en patrones, el análisis de JavaScript no es capaz de detectar todos los casos posibles.
+- No lleva a cabo la autenticación, solo examina los recursos que son accesibles al público.
+- No lleva a cabo ensayos ni explotación de vulnerabilidades.
 
-Estas limitaciones son coherentes con el objetivo de la herramienta, centrado exclusivamente en la fase de reconocimiento.
+Estas limitaciones son coherentes con la finalidad de la herramienta, que está enfocada únicamente en la etapa de reconocimiento.
 
 ---
 
 ## Consideraciones éticas
 
-La herramienta ha sido diseñada para su uso en entornos controlados y autorizados, aplicando únicamente técnicas pasivas. Su utilización en sistemas sin consentimiento puede suponer una vulneración de la normativa vigente.
+La herramienta ha sido creada para ser utilizada en contextos autorizados y controlados, utilizando solamente estrategias pasivas. Su uso en sistemas sin autorización puede constituir una violación de la legislación actual.
+
 
 ---
 
