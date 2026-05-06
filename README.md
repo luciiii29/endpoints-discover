@@ -1,6 +1,8 @@
 # Herramienta de reconocimiento desarrollada
 
 ## Objetivo
+Esta herramienta ha sido desarrollada como parte del Trabajo Fin de Grado realizado en la Universidad Internacional de La Rioja (UNIR).
+
 El objetivo de la herramienta desarrollada es automatizar la etapa de reconocimiento establecida en la metodología sugerida. Su propósito fundamental es determinar la superficie de ataque de una API o una aplicación web a partir de una URL base, con el fin de disminuir la carga manual del analista en esta fase inicial.
 
 La herramienta se fundamenta únicamente en métodos de análisis pasivo, que solo recopila datos disponibles al público sin efectuar pruebas intrusivas o aprovechar vulnerabilidades.
