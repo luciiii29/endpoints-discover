@@ -101,12 +101,12 @@ La herramienta ha sido creada para ser utilizada en contextos autorizados y cont
 ### Requisitos
 
 - Python 3.10 o superior.
-- Dependencias recogidas en `requirements.txt`.
+- Dependencias recogidas en `requerimientos.txt`.
 
 ### Instalación
 
 ```bash
-pip install -r requirements.txt
+pip install -r requerimientos.txt
 ```
 
 ### Ejecución básica
@@ -140,6 +140,10 @@ python recon.py https://ejemplo.com --output informe --format both --depth 2 --m
 ```
 herramienta python/
 ├── recon.py           # Código principal de la herramienta
-├── requirements.txt   # Dependencias del proyecto
-└── README.md          # Documentación del proyecto
+├── requerimientos.txt   # Dependencias del proyecto
+└── instrucciones.md          # Documentación del proyecto
 ```
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
